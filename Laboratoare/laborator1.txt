@@ -1,0 +1,6 @@
+minim 7 prezente
+display 4: trebuie sa folosim numar minim de apeluri GlVertex
+display 6: GL_TRIANGLES are nevoie de 6 vertex, stie el sa faca 2 triunghiuri din ele
+display 8: folosim 3 glBegin pentru cele 3 hexagoane
+		   albastru nu trece deloc spre centru, sunt separate complet
+bonus: hexagonul este generat procedural (avem o functie care il deseneaza)

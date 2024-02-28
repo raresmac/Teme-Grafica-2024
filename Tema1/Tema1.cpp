@@ -180,7 +180,12 @@ void Display6() {
 
     glColor3f(1, 0.1, 0.1); // red
     glBegin(GL_TRIANGLES);
-    // add lines of code here
+        glVertex2f(1, 1);
+        glVertex2f(1, 0.8);
+        glVertex2f(0.8, 0.8);
+        glVertex2f(-1, -1);
+        glVertex2f(-1, -0.8);
+        glVertex2f(-0.8, -0.8);
     glEnd();
 }
 
@@ -196,8 +201,23 @@ void Display7() {
 
     glColor3f(1, 0.1, 0.1); // red
     glBegin(GL_QUADS);
-    // add lines of code here
+        glVertex2f(1, 1);
+        glVertex2f(1, 0.5);
+        glVertex2f(0.5, 0.5);
+        glVertex2f(0.3, 0.75);
     glEnd();
+}
+
+void hexagonCreator(float length, float r, float g, float b) {
+    glColor3f(r, g, b);
+    glBegin(GL_POLYGON);
+	    glVertex2f(length, 0);
+	    glVertex2f(length / 2, -sqrt(3) * length / 2);
+	    glVertex2f(-length / 2, -sqrt(3) * length / 2);
+	    glVertex2f(-length, 0);
+	    glVertex2f(-length / 2, sqrt(3) * length / 2);
+	    glVertex2f(length / 2, sqrt(3) * length / 2);
+	glEnd();
 }
 
 void Display8() {
@@ -209,10 +229,9 @@ void Display8() {
     // OpenGL guarantees that only convex polygons are
     // drawn correctly.
 
-    glColor3f(1, 0.1, 0.1); // red
-    glBegin(GL_POLYGON);
-    // add lines of code here
-    glEnd();
+    hexagonCreator(0.75, 0.1, 0.1, 1); // blue
+    hexagonCreator(0.52, 1, 0.1, 0.1); // red
+    hexagonCreator(0.49, 1, 1, 1); // white
 }
 
 void Init(void) {
