@@ -10,4 +10,4 @@ Tema1.obj : error LNK2019: unresolved external symbol __imp_glutReshapeFunc refe
 Tema1.obj : error LNK2019: unresolved external symbol __imp_glutKeyboardFunc referenced in function main
 Tema1.obj : error LNK2019: unresolved external symbol __imp_glutMouseFunc referenced in function main
 glut32.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
-D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\Teme-Grafica-2024\Tema1\x64\Debug\Tema1.exe : fatal error LNK1120: 11 unresolved externals
+D:\Informatica\Gpc\Teme-Grafica-2024\Tema1\x64\Debug\Tema1.exe : fatal error LNK1120: 11 unresolved externals

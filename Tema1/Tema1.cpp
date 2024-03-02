@@ -139,7 +139,11 @@ void Display3() {
 
     glColor3f(1, 0.1, 0.1); // red
     glBegin(GL_POINTS);
-    // add lines of code here
+    //added lines of code
+    glVertex2f(-0.5, 0.5);
+    glVertex2f(0.5, 0.5);
+    glVertex2f(-0.5, -0.5);
+    glVertex2f(0.5, -0.5);
     glEnd();
 }
 
@@ -152,7 +156,11 @@ void Display4() {
 
     glColor3f(1, 0.1, 0.1); // red
     glBegin(GL_LINE_STRIP);
-    // add lines of code here
+    //added lines of code
+    glVertex2f(1.0, 1.0);
+    glVertex2f(1, 0.85);
+    glVertex2f(0.6, 0.65);
+    glVertex2f(0.6, 0.5);
     glEnd();
 }
 
@@ -165,7 +173,11 @@ void Display5() {
 
     glColor3f(1, 0.1, 0.1); // red
     glBegin(GL_LINE_LOOP);
-    // add lines of code here
+    // added lines of code
+    glVertex2f(1.0, 1.0);
+    glVertex2f(1, 0.85);
+    glVertex2f(0.6, 0.65);
+    glVertex2f(0.6, 0.5);
     glEnd();
 }
 
