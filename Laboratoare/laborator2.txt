@@ -1,0 +1,21 @@
+In exemplul 1.2, se ia + cu + si - cu - (exista doar doua ramuri).
+Sugestie bonus: animatie cu 1.2 in care modificam a si b si vedem cum se modifica desenul.
+
+2 pasi la tema:
+determinarea limitelor (prin parcurgerea tuturor punctelor)
+calcularea punctelor si scalarea
+
+culoarea e irelevanta
+
+pentru 2.2: 
+	- limitam functia si dam o explicatie matematica
+	- desenam marginile de mana (liniile negre)
+	
+2.3:
+	- sa fie tot acelasi numar de spire
+	
+2.5 si mai incolo:
+	- folosim coordonate polare, care iau o semidreapta de unghi 0 si se foloseste de unghi si distanta
+	- pentru a desena o floare, facem r = sin(10^t)
+	- pentru conversie din polar in cartezian: x = r * sin(t), y = r * cos(t)
+	- pentru conversie din cartezian in polar: t = arccos(x / r) = arcsin(y / r)
