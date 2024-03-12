@@ -42,6 +42,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <float.h>
 
 #include "glut.h"
 
@@ -203,11 +204,88 @@ void Display3() {
 }
 
 void Display4() {
-
+    double pi = 4 * atan(1.0);
+    double tmin = (-1) * pi / 2 + 0.07;
+    double tmax = (-1) * pi / 6 - 0.06;
+    double a = 0.2;
+    double ratia = 0.001;
+    double xmin = DBL_MAX;
+    double ymax = DBL_MIN;
+    for (double t = tmin + ratia; t < tmax; t += ratia) {
+        double x1 = a / (4 * cos(t) * cos(t) - 3);
+        double y1 = a * tan(t) / (4 * cos(t) * cos(t) - 3);
+        if (x1 < xmin) {
+            xmin = x1;
+        }
+        if (y1 > ymax) {
+            ymax = y1;
+        }
+    }
+    glPolygonMode(GL_FRONT, GL_FILL);
+    glColor3f(1, 0.1, 0.1); // rosu
+    for (double t = tmin + ratia*5; t < tmax; t += ratia*10) {
+        if (t == pi / 6 || t == -pi / 6)
+            continue;
+        double x1, y1, x2, y2;
+        x1 = a / (4 * cos(t) * cos(t) - 3);
+        y1 = a * tan(t) / (4 * cos(t) * cos(t) - 3);
+        if (t + ratia * 5 >= tmax)
+            continue;
+        t += ratia*5;
+        x2 = a / (4 * cos(t) * cos(t) - 3);
+        y2 = a * tan(t) / (4 * cos(t) * cos(t) - 3);
+    
+        glBegin(GL_TRIANGLES);
+        glVertex2f(x1, y1);
+        glVertex2f(xmin, ymax);
+        glVertex2f(x2, y2);
+        glEnd();
+    }
+    glPolygonMode(GL_FRONT, GL_LINE);
+    glColor3f(0.1, 0.1, 1); // albastru
+    glBegin(GL_LINE_STRIP);
+    glVertex2f(xmin, ymax);
+    for (double t = tmin + ratia; t < tmax; t += ratia) {
+        if (t == pi / 6 || t == -pi / 6)
+            continue;
+        double x1, y1;
+        x1 = a / (4 * cos(t) * cos(t) - 3);
+        y1 = a * tan(t) / (4 * cos(t) * cos(t) - 3);
+        glVertex2f(x1, y1);
+    }
+    glVertex2f(xmin, ymax);
+    glEnd();
+    
 }
 
 void Display5() {
-
+    double pi = 4 * atan(1.0);
+    double tmax = pi * 3;
+    double tmin = (-1) * pi * 3;
+    double a = 0.1;
+    double b = 0.2;
+    double ratia = 0.001;
+    /*double xmax = DBL_MIN;
+    double ymax = -0.2;
+    for (double t = tmin + ratia; t < tmax; t += ratia) {
+        double x1 = a * t - b * sin(t);
+        double y1 = a - b * cos(t);
+        if (x1 > xmax) {
+            xmax = x1;
+        }
+        if (y1 > ymax) {
+            ymax = y1;
+        }
+    }*/
+    glColor3f(0.1, 1, 0.1); // verde
+    glBegin(GL_LINE_STRIP);
+    for (double t = tmin + ratia; t < tmax; t += ratia) {
+        double x1, y1; //arata gresit cu scalare
+        x1 = a * t - b * sin(t); // xmax
+        y1 = a - b * cos(t); // ymax
+        glVertex2f(x1, y1);
+    }
+    glEnd();
 }
 
 void Display6() {
