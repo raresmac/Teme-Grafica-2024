@@ -1,6 +1,6 @@
 ﻿  Tema2.cpp
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema2\Tema2.cpp(299,20): warning C4101: 'y1': unreferenced local variable
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema2\Tema2.cpp(299,16): warning C4101: 'x1': unreferenced local variable
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema2\Tema2.cpp(340,20): warning C4101: 'y1': unreferenced local variable
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema2\Tema2.cpp(340,16): warning C4101: 'x1': unreferenced local variable
-  Tema1.vcxproj -> D:\Informatica\Gpc\Teme-Grafica-2024\Tema2\Debug\Tema2.exe
+D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\Teme-Grafica-2024\Tema2\Tema2.cpp(299,20): warning C4101: 'y1': unreferenced local variable
+D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\Teme-Grafica-2024\Tema2\Tema2.cpp(299,16): warning C4101: 'x1': unreferenced local variable
+D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\Teme-Grafica-2024\Tema2\Tema2.cpp(340,20): warning C4101: 'y1': unreferenced local variable
+D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\Teme-Grafica-2024\Tema2\Tema2.cpp(340,16): warning C4101: 'x1': unreferenced local variable
+  Tema1.vcxproj -> D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\Teme-Grafica-2024\Tema2\Debug\Tema2.exe
