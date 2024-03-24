@@ -347,6 +347,174 @@ public:
     }
 };
 
+class CImage1
+{
+public:
+    void image1(double lungime, int nivel, CPunct& p, CVector v)
+    {
+        double x, y;
+        if (nivel == 0)
+        {
+            v.deseneaza(p, lungime);
+        }
+        else
+        {
+            image1(lungime, nivel - 1, p, v);
+            v.getDest(p, lungime/3.0).getxy(x, y);
+            CPunct p1(x, y);
+            v.rotatie(90);
+            p1 = v.getDest(p1, 2.0 * lungime / 3.0);
+            v.rotatie(-90);
+            CPunct p5;
+            p5 = v.getDest(p1, lungime);
+            image1(lungime / 3.0, nivel - 1, p1, v);
+            image1(lungime / 3.0, nivel - 1, p5, v);
+            CPunct p2, p6;
+            p2 = v.getDest(p1, lungime / 3.0);
+            p6 = v.getDest(p5, lungime / 3.0);
+            v.rotatie(-90);
+            image1(lungime / 3.0, nivel - 1, p2, v);
+            image1(lungime / 3.0, nivel - 1, p6, v);
+            CPunct p3, p7;
+            p3 = v.getDest(p2, lungime / 3.0);
+            p7 = v.getDest(p6, lungime / 3.0);
+            v.rotatie(-90);
+            image1(lungime / 3.0, nivel - 1, p3, v);
+            image1(lungime / 3.0, nivel - 1, p7, v);
+            CPunct p4, p8;
+            p4 = v.getDest(p3, lungime / 3.0);
+            p8 = v.getDest(p7, lungime / 3.0);
+            v.rotatie(-90);
+            image1(lungime / 3.0, nivel - 1, p4, v);
+            image1(lungime / 3.0, nivel - 1, p8, v);
+        }
+    }
+
+    void afisare(double lungime, int nivel)
+    {
+        CVector v1(1.0, 0.0);
+        CPunct p1(-0.99, 0.99);
+        CVector v2(0.0, -1.0);
+        CPunct p2(0.99, 0.99);
+        CVector v3(-1.0, 0.0);
+        CPunct p3(0.99, -0.99);
+        CVector v4(0.0, 1.0);
+        CPunct p4(-0.99, -0.99);
+        CPunct p5(-1.0/3.0, 1.0/3.0);
+        CPunct p6(1.0/3.0, 1.0/3.0);
+        CPunct p7(1.0/3.0, -1.0/3.0);
+        CPunct p8(-1.0/3.0, -1.0/3.0);
+
+        v1.deseneaza(p1, lungime);
+        v2.deseneaza(p2, lungime);
+        v3.deseneaza(p3, lungime);
+        v4.deseneaza(p4, lungime);
+        image1(lungime/3.0, nivel, p5, v1);
+        image1(lungime/3.0, nivel, p6, v2);
+        image1(lungime/3.0, nivel, p7, v3);
+        image1(lungime/3.0, nivel, p8, v4);
+    }
+};
+
+
+class CImage2
+{
+public:
+    void image2(double lungime, int nivel, CPunct& p, CVector v)
+    {
+        CPunct p1, temp;
+        if (nivel == 0)
+        {
+            v.deseneaza(p, lungime);
+        }
+        else
+        {
+            image2(lungime, nivel - 1, p, v);
+            p1 = v.getDest(p, lungime);
+
+            v.rotatie(-45);
+            v.deseneaza(p1, 0.6 * lungime);
+            temp = v.getDest(p1, 0.6 * lungime);
+            image2(lungime * 0.4, nivel - 1, temp, v);
+            v.rotatie(90);
+            v.deseneaza(p1, lungime);
+
+            p1 = v.getDest(p1, lungime);
+            v.rotatie(15);
+            v.deseneaza(p1, 0.6 * lungime);
+            temp = v.getDest(p1, 0.6 * lungime);
+            image2(lungime * 0.4, nivel - 1, temp, v);
+            v.rotatie(-60);
+            v.deseneaza(p1, lungime);
+
+            p1 = v.getDest(p1, lungime);
+            v.rotatie(30);
+            v.deseneaza(p1, 0.1 * lungime);
+            temp = v.getDest(p1, 0.1 * lungime);
+            image2(lungime * 0.4, nivel - 1, temp, v);
+            v.rotatie(-120);
+            v.deseneaza(p1, 0.1 * lungime);
+            temp = v.getDest(p1, 0.1 * lungime);
+            image2(lungime * 0.4, nivel - 1, temp, v);
+        }
+    }
+
+    void afisare(double lungime, int nivel)
+    {
+        CVector v(0.0, -1.0);
+        CPunct p(-0.3, 1.35);
+
+        image2(lungime, nivel, p, v);
+    }
+};
+
+class CImage3
+{
+public:
+    void image3(double lungime, int nivel, CPunct& p, CVector v)
+    {
+        CPunct p1;
+        if (nivel == 0)
+        {
+            v.deseneaza(p, lungime);
+        }
+        else
+        {
+            v.rotatie(60);
+            p1 = v.getDest(p, lungime / 2.0);
+            v.rotatie(180);
+            image3(lungime / 2.0, nivel - 1, p1, v);
+            v.rotatie(120);
+            image3(lungime / 2.0, nivel - 1, p1, v);
+            p1 = v.getDest(p1, lungime / 2.0);
+            v.rotatie(-60);
+            p1 = v.getDest(p1, lungime / 2.0);
+            v.rotatie(180);
+            image3(lungime / 2.0, nivel - 1, p1, v);     
+        }
+    }
+
+    void afisare(double lungime, int nivel)
+    {
+        CVector v1(sqrt(3.0) / 2.0, -0.5);
+        CPunct p1(-0.95, 0.95);
+
+        CVector v2(0.0, -1.0);
+        CPunct p2 = v1.getDest(p1, lungime);
+
+        CVector v3(-sqrt(3.0) / 2.0, -0.5);
+        CPunct p3 = v2.getDest(p2, lungime);
+
+        v1.rotatie(180);
+        p1 = p2;
+        p3 = v3.getDest(p3, lungime);
+        v3.rotatie(180);
+
+        image3(lungime, nivel, p1, v1);
+        image3(lungime, nivel, p2, v2);
+        image3(lungime, nivel, p3, v3);
+    }
+};
 
 // the maximum number of iterations for the Julia-Fatou set membership testing 
 #define NRITER_JF 5000
@@ -679,13 +847,85 @@ void Display7() {
     nivel++;
 }
 void Display8() {
+    CImage1 ci1;
+    ci1.afisare(2, nivel);
     //TODO
+    char c[3];
+    sprintf(c, "%2d", nivel);
+    glRasterPos2d(-0.98, -0.98);
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'N');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'i');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'v');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'e');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'l');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, '=');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, c[0]);
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, c[1]);
+
+    glRasterPos2d(-1.0, -0.9);
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'I');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'm');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'a');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'g');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'e');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, ' ');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, '1');
+
+    nivel++;
 }
 void Display9() {
+    CImage2 ci2;
+    ci2.afisare(0.45, nivel);
     //TODO
+    char c[3];
+    sprintf(c, "%2d", nivel);
+    glRasterPos2d(-0.98, -0.98);
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'N');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'i');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'v');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'e');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'l');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, '=');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, c[0]);
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, c[1]);
+
+    glRasterPos2d(-1.0, -0.9);
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'I');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'm');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'a');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'g');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'e');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, ' ');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, '2');
+
+    nivel++;
 }
 void Display10() {
+    CImage3 ci3;
+    ci3.afisare(sqrt(3.0)/2, nivel);
     //TODO
+    char c[3];
+    sprintf(c, "%2d", nivel);
+    glRasterPos2d(-0.98, -0.98);
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'N');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'i');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'v');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'e');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'l');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, '=');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, c[0]);
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, c[1]);
+
+    glRasterPos2d(-1.0, -0.9);
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'I');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'm');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'a');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'g');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, 'e');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, ' ');
+    glutBitmapCharacter(GLUT_BITMAP_9_BY_15, '3');
+
+    nivel++;
 }
 
 void Init(void) {
