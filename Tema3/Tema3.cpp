@@ -680,6 +680,61 @@ private:
     } m;
 };
 
+class CMandelbrot
+{
+public:
+    int inside(CComplex c, int nr_iter)
+    {
+        CComplex z0, z1;
+        z0 = c;
+
+        for (int i = 1; i < nr_iter; i++) {
+            z1 = z0 * z0 + c;
+            if (z1.getModul() > 2) {
+                return i;
+            }
+            z0 = z1;
+        }
+
+        return 0;
+    }
+
+    void afisare(double ratia, int nr_iter) {
+        double xmin = 0, xmax = 0;
+        double ymin = 0, ymax = 0;
+
+        glBegin(GL_POINTS);
+        for (double x = -2.5; x <= 1.5; x += ratia) {
+            for (double y = -2; y <= 2; y += ratia) {
+                CComplex z(x, y);
+                int step = inside(z, nr_iter);
+                if (step == 0) {
+                    glColor3f(1.0, 0.1, 0.1);
+                    glVertex3d((x + 0.5) / 1.5, y / 1.5, 0);
+                    if (xmin > x) {
+                        xmin = x;
+                    }
+                    if (xmax < x) {
+						xmax = x;
+					}
+                    if (ymin > y) {
+                        ymin = y;
+                    }
+                    if (ymax < y) {
+						ymax = y;
+					}
+                }
+                else {
+                    glColor3f(step * 0.09, step * 0.09, step * 0.09);
+                    glVertex3d((x + 0.5) / 1.5, y / 1.5, 0);
+                }
+            }
+        }
+        glEnd();
+        //printf("%f %f %f %f\n", xmin, xmax, ymin, ymax);
+    }
+};
+
 // Julia-Fatou set for z0 = 0 and c = -0.12375+0.056805i
 void Display1() {
     CComplex c(-0.12375, 0.056805);
@@ -699,8 +754,9 @@ void Display2() {
     cjf.setnriter(30);
     cjf.display(-1, -1, 1, 1);
 }
+// Mandelbrot set
 void Display3() {
-    //TODO
+    CMandelbrot().afisare(0.003, 15);
 }
 // displays the Koch snowflake
 void Display4() {
