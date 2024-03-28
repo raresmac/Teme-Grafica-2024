@@ -496,23 +496,9 @@ public:
 
     void afisare(double lungime, int nivel)
     {
-        CVector v1(sqrt(3.0) / 2.0, -0.5);
-        CPunct p1(-0.95, 0.95);
-
-        CVector v2(0.0, -1.0);
-        CPunct p2 = v1.getDest(p1, lungime);
-
-        CVector v3(-sqrt(3.0) / 2.0, -0.5);
-        CPunct p3 = v2.getDest(p2, lungime);
-
-        v1.rotatie(180);
-        p1 = p2;
-        p3 = v3.getDest(p3, lungime);
-        v3.rotatie(180);
-
-        image3(lungime, nivel, p1, v1);
-        image3(lungime, nivel, p2, v2);
-        image3(lungime, nivel, p3, v3);
+        CVector v(0.0, -1.0);
+        CPunct p(-0.95, 0.95);
+        image3(lungime, nivel, p, v);
     }
 };
 
@@ -958,7 +944,7 @@ void Display9() {
 }
 void Display10() {
     CImage3 ci3;
-    ci3.afisare(sqrt(3.0)/2, nivel);
+    ci3.afisare(sqrt(3.0), nivel);
     //TODO
     char c[3];
     sprintf(c, "%2d", nivel);
