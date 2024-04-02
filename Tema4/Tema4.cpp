@@ -65,21 +65,26 @@ public:
 		glEnd();
 	}
 
-	void deseneazaCerc(double x, double y, double r, int numberOfSegments) {
+	void deseneazaCerc(double x, double y, double r, int numberOfSegments, double thickness=1, char color='g') {
 
 		double pi = 4 * atan(1.0);
+		if(color == 'r')
+			glColor3f(1.0, 0.1, 0.1);
+		else
+			glColor3f(0.2, 0.2, 0.2);
 
-		glColor3ub(71, 71, 71);
+		glLineWidth(thickness);
 		glBegin(GL_POLYGON);
-		glVertex2f(x, y);
+		//glVertex2f(x, y);
 
-		for (int i = 0; i < numberOfSegments; i++) {
-			float x_aux = x + (this->radius * cos(i * 2 * pi / numberOfSegments));
-			float y_aux = y + (this->radius * sin(i * 2 * pi / numberOfSegments));
+		for (int i = 0; i <= numberOfSegments; i++) {
+			float x_aux = x + (r * cos(i * 2 * pi / numberOfSegments));
+			float y_aux = y + (r * sin(i * 2 * pi / numberOfSegments));
 			glVertex2f(x_aux, y_aux);
 		}
 
 		glEnd();
+		glLineWidth(1);
 	}
 
 	bool inBorder(int x, int y) {
@@ -145,6 +150,7 @@ public:
 		}
 
 		glColor3f(1.0, 0.1, 0.1);
+		glLineWidth(3);
 		glBegin(GL_LINES);
 		double x1, y1;
 		x1 = this->cx + x0 * this->dx;
@@ -155,6 +161,81 @@ public:
 		y1 = this->cy + yn * this->dy;
 		glVertex2f(x1, y1);
 		glEnd();
+		glLineWidth(1);
+	}
+
+	void AfisarePuncteCerc3(int x, int y, map<int, int> M)
+	{
+		double x1, y1;
+		x1 = this->cx + y * this->dx;
+		y1 = this->cy + x * this->dy;
+		if(this->inBorder(x1, y1))
+			deseneazaCerc(x1, y1, this->radius, 10000);
+		x1 = this->cx - y * this->dx;
+		y1 = this->cy + x * this->dy;
+		if (this->inBorder(x1, y1))
+			deseneazaCerc(x1, y1, this->radius, 10000);
+		x1 = this->cx - x * this->dx;
+		y1 = this->cy - y * this->dy;
+		if (this->inBorder(x1, y1))
+			deseneazaCerc(x1, y1, this->radius, 10000);
+		x1 = this->cx - y * this->dx;
+		y1 = this->cy - x * this->dy;
+		if (this->inBorder(x1, y1))
+			deseneazaCerc(x1, y1, this->radius, 10000);
+		x1 = this->cx + y * this->dx;
+		y1 = this->cy - x * this->dy;
+		if (this->inBorder(x1, y1))
+			deseneazaCerc(x1, y1, this->radius, 10000);
+		x1 = this->cx + x * this->dx;
+		y1 = this->cy - y * this->dy;
+		if (this->inBorder(x1, y1))
+			deseneazaCerc(x1, y1, this->radius, 10000);
+	}
+
+	void ScanConvertCircle4(int R, int width)
+	{
+		int x = 0, y = R;
+		int d = 1 - R;
+		int dE = 3, dSE = -2 * R + 5;
+		map<int, int> M;
+		AfisarePuncteCerc3(x, y, M);
+		for (int i = -width / 2; i < width / 2; i++) {
+			AfisarePuncteCerc3(x - i, y, M);
+			AfisarePuncteCerc3(x + i, y, M);
+			AfisarePuncteCerc3(x, y - i, M);
+			AfisarePuncteCerc3(x, y + i, M);
+		}
+		while (y > x && x < R * sqrt(2) / 2)
+		{
+			if (d < 0)
+			{
+				d += dE;
+				dE += 2;
+				dSE += 2;
+			}
+			else
+			{
+				d += dSE;
+				dE += 2;
+				dSE += 4;
+				y--;
+			}
+			x++;
+			AfisarePuncteCerc3(x, y, M);
+			for (int i = -width / 2; i < width / 2; i++) {
+				if(x - i < R * sqrt(2) / 2)
+					AfisarePuncteCerc3(x - i, y, M);
+				AfisarePuncteCerc3(x + i, y, M);
+				AfisarePuncteCerc3(x, y - i, M);
+				AfisarePuncteCerc3(x, y + i, M);
+			}
+		}
+
+		glColor3f(1.0, 0.1, 0.1);
+		glPolygonMode(GL_FRONT, GL_LINE);
+		deseneazaCerc(this->cx, this->cy, this->radius * R * 3, 10000, 5, 'r');
+		glPolygonMode(GL_FRONT, GL_FILL);
 	}
 
 	void writePixel(int i, int j) {
@@ -179,12 +260,23 @@ void display1() {
 	grilaCarteziana->ScanConvertSegments3(0, 0, 15, 7, 1);
 }
 
+void display2() {
+	int numarLinii = 16;
+	int numarColoane = 16;
+	GrilaCarteziana* grilaCarteziana = new GrilaCarteziana(numarLinii, numarColoane);
+	grilaCarteziana->ScanConvertCircle4(13, 3);
+}
+
 void Display(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	switch (prevKey) {
 	case '1':
 		display1();
+		break;
+	case '2':
+		display2();
+		break;
 	default:
 		break;
 	}
