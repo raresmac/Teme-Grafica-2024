@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "glut.h"
+#include <map>
 
 using namespace std;
 unsigned char prevKey;
@@ -13,8 +14,8 @@ public:
 	int numarColoane;
 	double cx;
 	double cy;
-	double dc;
-	double de;
+	double dx;
+	double dy;
 	double epsilon;
 	double radius;
 
@@ -24,13 +25,12 @@ public:
 		this->epsilon = 0.1;
 		this->cx = -1 + this->epsilon;
 		this->cy = -1 + this->epsilon;
-		this->dc = (2 - 2 * this->epsilon) / (numarColoane - 1);
-		this->de = (2 - 2 * this->epsilon) / (numarLinii - 1);
+		this->dx = (2 - 2 * this->epsilon) / (numarColoane - 1);
+		this->dy = (2 - 2 * this->epsilon) / (numarLinii - 1);
 
-		this->radius = this->dc / 3;
+		this->radius = this->dx / 3;
 		this->deseneazaColoane();
 		this->deseneazaLinii();
-		//this->writePixel(4, 4);
 	}
 
 	void deseneazaLinii() {
@@ -43,7 +43,7 @@ public:
 		for (int i = 1; i <= this->numarLinii; i++) {
 			glVertex2f(p1_x, p_y);
 			glVertex2f(p2_x, p_y);
-			p_y += this->de;
+			p_y += this->dy;
 		}
 
 		glEnd();
@@ -59,7 +59,7 @@ public:
 		for (int i = 1; i <= this->numarColoane; i++) {
 			glVertex2f(p_x, p1_y);
 			glVertex2f(p_x, p2_y);
-			p_x += this->dc;
+			p_x += this->dx;
 		}
 
 		glEnd();
@@ -82,9 +82,84 @@ public:
 		glEnd();
 	}
 
+	bool inBorder(int x, int y) {
+		if (x < 0 || x >= this->numarColoane || y < 0 || y >= this->numarLinii) {
+			return false;
+		}
+		return true;
+	}
+
+	void ScanConvertSegments3(int x0, int y0, int xn, int yn, int width)
+	{
+		double dx, dy;
+		dx = abs(xn - x0);
+		dy = abs(yn - y0);
+
+		int d = 2 * dy - dx;
+		int dE = 2 * dy;
+		int dNE = 2 * (dy - dx);
+		int x = x0, y = y0;
+		map<int, int> m;
+		m[x] = y;
+
+		this->writePixel(x, y);
+		for (int i = -width / 2; i < width / 2; i++) {
+			if(this->inBorder(x - i, y))
+				this->writePixel(x - i, y);
+			if (this->inBorder(x + i, y))
+				this->writePixel(x + i, y);
+			if (this->inBorder(x, y - i))
+				this->writePixel(x, y - i);
+			if (this->inBorder(x, y + i))
+				this->writePixel(x, y + i);
+		}
+
+		while (x != xn)
+		{
+			if (d <= 0) { 
+				d += dE; 
+				x++; 
+			}
+			else { 
+				d += dNE; 
+				x++;
+				if (x0 < xn && y0 < yn) {
+					y++;
+				}
+				else {
+					y--;
+				}
+			}
+			this->writePixel(x, y);
+			for (int i = -width / 2; i < width / 2; i++) {
+				if(this->inBorder(x - i, y))
+					this->writePixel(x - i, y);
+				if (this->inBorder(x + i, y))
+					this->writePixel(x + i, y);
+				if (this->inBorder(x, y - i))
+					this->writePixel(x, y - i);
+				if (this->inBorder(x, y + i))
+					this->writePixel(x, y + i);
+			}
+			m[x] = y;
+		}
+
+		glColor3f(1.0, 0.1, 0.1);
+		glBegin(GL_LINES);
+		double x1, y1;
+		x1 = this->cx + x0 * this->dx;
+		y1 = this->cy + y0 * this->dy;
+		glVertex2f(x1, y1);
+
+		x1 = this->cx + xn * this->dx;
+		y1 = this->cy + yn * this->dy;
+		glVertex2f(x1, y1);
+		glEnd();
+	}
+
 	void writePixel(int i, int j) {
-		double x = this->cx + i * this->dc;
-		double y = this->cy + j * this->de;
+		double x = this->cx + i * this->dx;
+		double y = this->cy + j * this->dy;
 		deseneazaCerc(x, y, radius, 10000);
 	}
 };
@@ -100,6 +175,8 @@ void display1() {
 	int numarLinii = 16;
 	int numarColoane = 16;
 	GrilaCarteziana* grilaCarteziana = new GrilaCarteziana(numarLinii, numarColoane);
+	grilaCarteziana->ScanConvertSegments3(0, 15, 15, 10, 3);
+	grilaCarteziana->ScanConvertSegments3(0, 0, 15, 7, 1);
 }
 
 void Display(void) {
