@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <math.h>
 #include "glut.h"
-#include <map>
 
 using namespace std;
 unsigned char prevKey;
@@ -65,17 +64,31 @@ public:
 		glEnd();
 	}
 
-	void deseneazaCerc(double x, double y, double r, int numberOfSegments, double thickness=1, char color='g') {
+	void deseneazaCerc(double x, double y, double r, int numberOfSegments, double thickness=1) {
 
 		double pi = 4 * atan(1.0);
-		if(color == 'r')
-			glColor3f(1.0, 0.1, 0.1);
-		else
-			glColor3f(0.2, 0.2, 0.2);
+		glColor3f(0.2, 0.2, 0.2);
 
 		glLineWidth(thickness);
 		glBegin(GL_POLYGON);
-		//glVertex2f(x, y);
+
+		for (int i = 0; i <= numberOfSegments; i++) {
+			float x_aux = x + (r * cos(i * 2 * pi / numberOfSegments));
+			float y_aux = y + (r * sin(i * 2 * pi / numberOfSegments));
+			glVertex2f(x_aux, y_aux);
+		}
+
+		glEnd();
+		glLineWidth(1);
+	}
+
+	void deseneazaCercRosu(double x, double y, double r, int numberOfSegments, double thickness = 1) {
+
+		double pi = 4 * atan(1.0);
+		glColor3f(1.0, 0.1, 0.1);
+
+		glLineWidth(thickness);
+		glBegin(GL_LINE_STRIP);
 
 		for (int i = 0; i <= numberOfSegments; i++) {
 			float x_aux = x + (r * cos(i * 2 * pi / numberOfSegments));
@@ -88,7 +101,7 @@ public:
 	}
 
 	bool inBorder(int x, int y) {
-		if (x < 0 || x >= this->numarColoane || y < 0 || y >= this->numarLinii) {
+		if (x < this->cx || x >= this->cx + this->numarColoane || y < this->cy || y >= this->cy + this->numarLinii) {
 			return false;
 		}
 		return true;
@@ -104,8 +117,6 @@ public:
 		int dE = 2 * dy;
 		int dNE = 2 * (dy - dx);
 		int x = x0, y = y0;
-		map<int, int> m;
-		m[x] = y;
 
 		this->writePixel(x, y);
 		for (int i = -width / 2; i < width / 2; i++) {
@@ -146,7 +157,6 @@ public:
 				if (this->inBorder(x, y + i))
 					this->writePixel(x, y + i);
 			}
-			m[x] = y;
 		}
 
 		glColor3f(1.0, 0.1, 0.1);
@@ -164,7 +174,7 @@ public:
 		glLineWidth(1);
 	}
 
-	void AfisarePuncteCerc3(int x, int y, map<int, int> M)
+	void AfisarePuncteCerc3(int x, int y)
 	{
 		double x1, y1;
 		x1 = this->cx + y * this->dx;
@@ -198,13 +208,12 @@ public:
 		int x = 0, y = R;
 		int d = 1 - R;
 		int dE = 3, dSE = -2 * R + 5;
-		map<int, int> M;
-		AfisarePuncteCerc3(x, y, M);
+		AfisarePuncteCerc3(x, y);
 		for (int i = -width / 2; i < width / 2; i++) {
-			AfisarePuncteCerc3(x - i, y, M);
-			AfisarePuncteCerc3(x + i, y, M);
-			AfisarePuncteCerc3(x, y - i, M);
-			AfisarePuncteCerc3(x, y + i, M);
+			AfisarePuncteCerc3(x - i, y);
+			AfisarePuncteCerc3(x + i, y);
+			AfisarePuncteCerc3(x, y - i);
+			AfisarePuncteCerc3(x, y + i);
 		}
 		while (y > x && x < R * sqrt(2) / 2)
 		{
@@ -222,19 +231,19 @@ public:
 				y--;
 			}
 			x++;
-			AfisarePuncteCerc3(x, y, M);
+			AfisarePuncteCerc3(x, y);
 			for (int i = -width / 2; i < width / 2; i++) {
 				if(x - i < R * sqrt(2) / 2)
-					AfisarePuncteCerc3(x - i, y, M);
-				AfisarePuncteCerc3(x + i, y, M);
-				AfisarePuncteCerc3(x, y - i, M);
-				AfisarePuncteCerc3(x, y + i, M);
+					AfisarePuncteCerc3(x - i, y);
+				AfisarePuncteCerc3(x + i, y);
+				AfisarePuncteCerc3(x, y - i);
+				AfisarePuncteCerc3(x, y + i);
 			}
 		}
 
 		glColor3f(1.0, 0.1, 0.1);
 		glPolygonMode(GL_FRONT, GL_LINE);
-		deseneazaCerc(this->cx, this->cy, this->radius * R * 3, 10000, 5, 'r');
+		deseneazaCercRosu(this->cx, this->cy, this->dx * R, 10000, 5);
 		glPolygonMode(GL_FRONT, GL_FILL);
 	}
 
