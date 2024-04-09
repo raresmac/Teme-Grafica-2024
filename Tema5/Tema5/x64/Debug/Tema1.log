@@ -1,0 +1,14 @@
+﻿  Tema5.cpp
+Tema5.obj : error LNK2019: unresolved external symbol __imp___glutInitWithExit referenced in function glutInit_ATEXIT_HACK
+Tema5.obj : error LNK2019: unresolved external symbol __imp_glutInitDisplayMode referenced in function main
+Tema5.obj : error LNK2019: unresolved external symbol __imp_glutInitWindowPosition referenced in function main
+Tema5.obj : error LNK2019: unresolved external symbol __imp_glutInitWindowSize referenced in function main
+Tema5.obj : error LNK2019: unresolved external symbol __imp_glutMainLoop referenced in function main
+Tema5.obj : error LNK2019: unresolved external symbol __imp___glutCreateWindowWithExit referenced in function glutCreateWindow_ATEXIT_HACK
+Tema5.obj : error LNK2019: unresolved external symbol __imp_glutPostRedisplay referenced in function "void __cdecl KeyboardFunc(unsigned char,int,int)" (?KeyboardFunc@@YAXEHH@Z)
+Tema5.obj : error LNK2019: unresolved external symbol __imp_glutDisplayFunc referenced in function main
+Tema5.obj : error LNK2019: unresolved external symbol __imp_glutReshapeFunc referenced in function main
+Tema5.obj : error LNK2019: unresolved external symbol __imp_glutKeyboardFunc referenced in function main
+Tema5.obj : error LNK2019: unresolved external symbol __imp_glutMouseFunc referenced in function main
+glut32.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+D:\Informatica\Gpc\Teme-Grafica-2024\Tema5\x64\Debug\Tema5.exe : fatal error LNK1120: 11 unresolved externals
