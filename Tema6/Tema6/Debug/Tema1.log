@@ -1,6 +1,6 @@
 ﻿  Tema6.cpp
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(18,10): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(18,39): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(24,10): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(24,38): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-  Tema1.vcxproj -> D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Debug\Tema6.exe
+D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\Teme-Grafica-2024\Tema6\Tema6.cpp(18,10): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\Teme-Grafica-2024\Tema6\Tema6.cpp(18,39): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\Teme-Grafica-2024\Tema6\Tema6.cpp(24,10): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\Teme-Grafica-2024\Tema6\Tema6.cpp(24,38): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+  Tema1.vcxproj -> D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\Teme-Grafica-2024\Tema6\Debug\Tema6.exe

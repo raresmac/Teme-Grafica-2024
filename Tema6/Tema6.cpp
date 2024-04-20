@@ -135,7 +135,9 @@ void Display()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        glMultMatrixf(customMatrix);
+        //glRotated(-60, 0, 1, 0);
+        //glRotated(30, 1, 1, 0);
+        glScaled(0.1, 0.1, -0.1);
         DisplayAxe();
         DisplayObiect();
         break;
@@ -213,7 +215,7 @@ void proiectieParalela(unsigned char c) {
         glOrtho(-0.5, 5.5, -0.5, 5.5, -10, 20);
         break;
     case '2':
-        glOrtho(-5, 10, -5, 10, -10, 100);
+        glFrustum(-0.75, 0.75, -0.75, 0.75, 0.38, 1);
         break;
     case '3':
         glOrtho(-3, 7, -3, 7, -5, 100);
