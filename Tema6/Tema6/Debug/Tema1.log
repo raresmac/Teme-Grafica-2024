@@ -1,6 +1,6 @@
 ﻿  Tema6.cpp
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(23,10): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(23,39): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(29,10): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(29,38): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(19,10): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(19,39): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(25,10): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Tema6.cpp(25,38): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
   Tema1.vcxproj -> D:\Informatica\Gpc\Teme-Grafica-2024\Tema6\Debug\Tema6.exe
