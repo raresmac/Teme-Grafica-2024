@@ -12,6 +12,11 @@ unsigned char prevKey;
 GLint k;
 // the size of the cube
 GLdouble lat = 5;
+double fov = 45.0; // Field of View
+double aspect = 1.0;
+double near = -5; // Near clipping plane
+double far = 100; // Far clipping plane
+
 float customMatrix[16] = {
     1, 0, 0, 0,
     0, 1, 0, 0,
@@ -135,9 +140,10 @@ void Display()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        //glRotated(-60, 0, 1, 0);
-        //glRotated(30, 1, 1, 0);
-        glScaled(0.1, 0.1, -0.1);
+        glMultMatrixf(customMatrix);
+        gluPerspective(fov, aspect, near, far);
+        //glScaled(0.1, 0.1, -0.1);
+        glTranslated(-10, -10, -20);
         DisplayAxe();
         DisplayObiect();
         break;
@@ -215,7 +221,9 @@ void proiectieParalela(unsigned char c) {
         glOrtho(-0.5, 5.5, -0.5, 5.5, -10, 20);
         break;
     case '2':
-        glFrustum(-0.75, 0.75, -0.75, 0.75, 0.38, 1);
+        glOrtho(-3, 0.5, -3, 0.5, -10, 10);
+        //glOrtho(-4, 1.5, -4, 1.5, -10, 10);
+        //glFrustum(-0.75, 0.75, -0.75, 0.75, 0.38, 10);
         break;
     case '3':
         glOrtho(-3, 7, -3, 7, -5, 100);
