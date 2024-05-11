@@ -117,11 +117,11 @@ void main() {
 	  on the x, y or/and z coordinates of that pixel, and time. You may work on a single
 	  colour channel, for clarity.
 	*/
-	float newX = gl_FragCoord.x / 4.0; // Manipulate x-coordinate
-	float newY = gl_FragCoord.y / 4.0; // Manipulate y-coordinate
+	float newX = gl_FragCoord.x / 4.0; // impartirea la 4 mareste liniile
+	float newY = gl_FragCoord.y / 4.0;
 
-    rgba.r = sin((newX + newY) + sin(u_fragmentTime));
-    rgba.g = 1.0;
+    rgba.r = sin(newX + newY);
+    rgba.g = sin(u_fragmentTime);
     rgba.b = 1.0;
     rgba.a = 1.0;
 
